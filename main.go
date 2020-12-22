@@ -18,8 +18,11 @@ import (
 
 //文件最大长度2M
 var maxLenght int64 = 2 << 20
+//设置上传目录
+var dir = os.TempDir()
 
 func main() {
+
 	app := fiber.New()
 
 	app.Post("/decode", func(c *fiber.Ctx) error {
@@ -40,11 +43,8 @@ func main() {
 
 		//类型验证
 
-
-		//设置上传目录
-		dir := os.TempDir()
 		//设置文件名
-		tmpName := fmt.Sprintf("%d", time.Now().UnixNano())
+		tmpName := fmt.Sprintf("/%d", time.Now().UnixNano())
 		fileName := dir + tmpName + file.Filename
 
 		//删除图片
@@ -92,10 +92,9 @@ func main() {
 					})
 				}
 
-				//设置上传目录
-				dir := os.TempDir()
+
 				//设置文件名
-				tmpName := fmt.Sprintf("%d", time.Now().UnixNano())
+				tmpName := fmt.Sprintf("/%d", time.Now().UnixNano())
 				fileName := dir + tmpName
 
 
@@ -142,7 +141,7 @@ func main() {
 		return nil
 	})
 
-	app.Listen(":3000")
+	app.Listen(":9900")
 }
 
 
