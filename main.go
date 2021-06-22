@@ -25,7 +25,7 @@ func main() {
 
 	app := fiber.New()
 
-	app.Post("/decode", func(c *fiber.Ctx) error {
+	app.Post("/file", func(c *fiber.Ctx) error {
 		//接收文件
 		file, err := c.FormFile("img")
 		if err !=nil {
@@ -65,7 +65,7 @@ func main() {
 
 	})
 
-	app.Get("/url_decode", func(c *fiber.Ctx) error {
+	app.Get("/url", func(c *fiber.Ctx) error {
 		http_url := c.Query("http_url")
 		if http_url == "" || len(http_url) < 2 {
 			return c.JSON(fiber.Map{"code":404, "msg":"Parameter Error", "data": fiber.Map{}})
